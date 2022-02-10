@@ -1,0 +1,843 @@
+{
+    "Input": {
+        "name": "data",
+        "top": "data",
+        "dim": [
+            1,
+            3,
+            192,
+            320
+        ],
+        "mean_value": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "scale": [
+            0.0039063,
+            0.0039063,
+            0.0039063
+        ],
+        "pad": 0
+    },
+    "ConvolutionReLU": {
+        "name": "relu1",
+        "bottom": "data",
+        "top": "relu1",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 2,
+        "has_relu": true
+    },
+    "Pooling": {
+        "name": "max_pool1",
+        "bottom": "relu1",
+        "top": "max_pool1",
+        "kernel_size": 2,
+        "stride": 2,
+        "mode": "max"
+    },
+    "ConvolutionReLU": {
+        "name": "relu2",
+        "bottom": "max_pool1",
+        "top": "relu2",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm3",
+        "bottom": "relu2",
+        "top": "batch_norm3",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 2,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu3",
+        "bottom": "batch_norm3",
+        "top": "relu3",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm5",
+        "bottom": "max_pool1",
+        "top": "batch_norm5",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 2,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu4",
+        "bottom": "batch_norm5",
+        "top": "relu4",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel1",
+        "bottom": [
+            "relu3",
+            "relu4"
+        ],
+        "top": "shuffle_channel1",
+        "group": 2
+    },
+    "Diverg": {
+        "name": "split_blob1",
+        "bottom": "shuffle_channel1",
+        "top": "split_blob1",
+        "start": 0,
+        "length": 24
+    },
+    "Diverg": {
+        "name": "split_blob2",
+        "bottom": "shuffle_channel1",
+        "top": "split_blob2",
+        "start": 24,
+        "length": 24
+    },
+    "ConvolutionReLU": {
+        "name": "relu5",
+        "bottom": "split_blob2",
+        "top": "relu5",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm8",
+        "bottom": "relu5",
+        "top": "batch_norm8",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu6",
+        "bottom": "batch_norm8",
+        "top": "relu6",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel2",
+        "bottom": [
+            "split_blob1",
+            "relu6"
+        ],
+        "top": "shuffle_channel2",
+        "group": 2
+    },
+    "Diverg": {
+        "name": "split_blob3",
+        "bottom": "shuffle_channel2",
+        "top": "split_blob3",
+        "start": 0,
+        "length": 24
+    },
+    "Diverg": {
+        "name": "split_blob4",
+        "bottom": "shuffle_channel2",
+        "top": "split_blob4",
+        "start": 24,
+        "length": 24
+    },
+    "ConvolutionReLU": {
+        "name": "relu7",
+        "bottom": "split_blob4",
+        "top": "relu7",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm11",
+        "bottom": "relu7",
+        "top": "batch_norm11",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu8",
+        "bottom": "batch_norm11",
+        "top": "relu8",
+        "num_output": 24,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel3",
+        "bottom": [
+            "split_blob3",
+            "relu8"
+        ],
+        "top": "shuffle_channel3",
+        "group": 2
+    },
+    "ConvolutionReLU": {
+        "name": "relu9",
+        "bottom": "shuffle_channel3",
+        "top": "relu9",
+        "num_output": 48,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm14",
+        "bottom": "relu9",
+        "top": "batch_norm14",
+        "num_output": 48,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 2,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu10",
+        "bottom": "batch_norm14",
+        "top": "relu10",
+        "num_output": 48,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm16",
+        "bottom": "shuffle_channel3",
+        "top": "batch_norm16",
+        "num_output": 48,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 2,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu11",
+        "bottom": "batch_norm16",
+        "top": "relu11",
+        "num_output": 48,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel4",
+        "bottom": [
+            "relu10",
+            "relu11"
+        ],
+        "top": "shuffle_channel4",
+        "group": 2
+    },
+    "Diverg": {
+        "name": "split_blob5",
+        "bottom": "shuffle_channel4",
+        "top": "split_blob5",
+        "start": 0,
+        "length": 48
+    },
+    "Diverg": {
+        "name": "split_blob6",
+        "bottom": "shuffle_channel4",
+        "top": "split_blob6",
+        "start": 48,
+        "length": 48
+    },
+    "ConvolutionReLU": {
+        "name": "relu12",
+        "bottom": "split_blob6",
+        "top": "relu12",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm19",
+        "bottom": "relu12",
+        "top": "batch_norm19",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu13",
+        "bottom": "batch_norm19",
+        "top": "relu13",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel5",
+        "bottom": [
+            "split_blob5",
+            "relu13"
+        ],
+        "top": "shuffle_channel5",
+        "group": 2
+    },
+    "Diverg": {
+        "name": "split_blob7",
+        "bottom": "shuffle_channel5",
+        "top": "split_blob7",
+        "start": 0,
+        "length": 32
+    },
+    "Diverg": {
+        "name": "split_blob8",
+        "bottom": "shuffle_channel5",
+        "top": "split_blob8",
+        "start": 32,
+        "length": 32
+    },
+    "ConvolutionReLU": {
+        "name": "relu14",
+        "bottom": "split_blob8",
+        "top": "relu14",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm22",
+        "bottom": "relu14",
+        "top": "batch_norm22",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu15",
+        "bottom": "batch_norm22",
+        "top": "relu15",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel6",
+        "bottom": [
+            "split_blob7",
+            "relu15"
+        ],
+        "top": "shuffle_channel6",
+        "group": 2
+    },
+    "Diverg": {
+        "name": "split_blob9",
+        "bottom": "shuffle_channel6",
+        "top": "split_blob9",
+        "start": 0,
+        "length": 32
+    },
+    "Diverg": {
+        "name": "split_blob10",
+        "bottom": "shuffle_channel6",
+        "top": "split_blob10",
+        "start": 32,
+        "length": 32
+    },
+    "ConvolutionReLU": {
+        "name": "relu16",
+        "bottom": "split_blob10",
+        "top": "relu16",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm25",
+        "bottom": "relu16",
+        "top": "batch_norm25",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu17",
+        "bottom": "batch_norm25",
+        "top": "relu17",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel7",
+        "bottom": [
+            "split_blob9",
+            "relu17"
+        ],
+        "top": "shuffle_channel7",
+        "group": 2
+    },
+    "Diverg": {
+        "name": "split_blob11",
+        "bottom": "shuffle_channel7",
+        "top": "split_blob11",
+        "start": 0,
+        "length": 32
+    },
+    "Diverg": {
+        "name": "split_blob12",
+        "bottom": "shuffle_channel7",
+        "top": "split_blob12",
+        "start": 32,
+        "length": 32
+    },
+    "ConvolutionReLU": {
+        "name": "relu18",
+        "bottom": "split_blob12",
+        "top": "relu18",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "batch_norm28",
+        "bottom": "relu18",
+        "top": "batch_norm28",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu19",
+        "bottom": "batch_norm28",
+        "top": "relu19",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Permute": {
+        "name": "shuffle_channel8",
+        "bottom": [
+            "split_blob11",
+            "relu19"
+        ],
+        "top": "shuffle_channel8",
+        "group": 2
+    },
+    "ConvolutionReLU": {
+        "name": "conv30",
+        "bottom": "max_pool1",
+        "top": "conv30",
+        "num_output": 8,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "conv31",
+        "bottom": "shuffle_channel3",
+        "top": "conv31",
+        "num_output": 16,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu20",
+        "bottom": "shuffle_channel8",
+        "top": "relu20",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "conv33",
+        "bottom": "relu20",
+        "top": "conv33",
+        "num_output": 96,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionDepthWise": {
+        "name": "conv34",
+        "bottom": "conv33",
+        "top": "conv34",
+        "num_output": 96,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu21",
+        "bottom": "conv34",
+        "top": "relu21",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1",
+        "bottom": [
+            "relu21",
+            "relu20"
+        ],
+        "top": "add1",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "Deconvolution": {
+        "name": "conv_transpose1",
+        "bottom": "add1",
+        "top": "conv_transpose1",
+        "num_output": 16,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 2,
+        "stride": 2,
+        "has_relu": false
+    },
+    "Eltwise": {
+        "name": "relu22",
+        "bottom": [
+            "conv_transpose1",
+            "conv31"
+        ],
+        "top": "relu22",
+        "elt_type": "sum",
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "conv36",
+        "bottom": "relu22",
+        "top": "conv36",
+        "num_output": 48,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionDepthWise": {
+        "name": "conv37",
+        "bottom": "conv36",
+        "top": "conv37",
+        "num_output": 48,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu23",
+        "bottom": "conv37",
+        "top": "relu23",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add3",
+        "bottom": [
+            "relu23",
+            "relu22"
+        ],
+        "top": "add3",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "Deconvolution": {
+        "name": "conv_transpose2",
+        "bottom": "add3",
+        "top": "conv_transpose2",
+        "num_output": 8,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 2,
+        "stride": 2,
+        "has_relu": false
+    },
+    "Eltwise": {
+        "name": "relu24",
+        "bottom": [
+            "conv_transpose2",
+            "conv30"
+        ],
+        "top": "relu24",
+        "elt_type": "sum",
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "conv39",
+        "bottom": "relu24",
+        "top": "conv39",
+        "num_output": 24,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionDepthWise": {
+        "name": "conv40",
+        "bottom": "conv39",
+        "top": "conv40",
+        "num_output": 24,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu25",
+        "bottom": "conv40",
+        "top": "relu25",
+        "num_output": 8,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add5",
+        "bottom": [
+            "relu25",
+            "relu24"
+        ],
+        "top": "add5",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu26",
+        "bottom": "add5",
+        "top": "relu26",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "relu27",
+        "bottom": "relu26",
+        "top": "relu27",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "conv44",
+        "bottom": "relu27",
+        "top": "conv44",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "Pixelshuffle": {
+        "name": "pixel_shuffle1",
+        "bottom": "conv44",
+        "top": "pixel_shuffle1",
+    	"upscale_factor": 2
+    },
+    "Deconvolution": {
+        "name": "conv_transpose3",
+        "bottom": "pixel_shuffle1",
+        "top": "conv_transpose3",
+        "num_output": 2,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 2,
+        "stride": 2,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu28",
+        "bottom": "add5",
+        "top": "relu28",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "relu29",
+        "bottom": "relu28",
+        "top": "relu29",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "conv47_filled_zeros",
+        "bottom": "relu29",
+        "top": "conv47_filled_zeros",
+        "num_output": 8,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "relu30",
+        "bottom": "add5",
+        "top": "relu30",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionDepthWise": {
+        "name": "relu31",
+        "bottom": "relu30",
+        "top": "relu31",
+        "num_output": 16,
+        "bias_iterm": true,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "conv50",
+        "bottom": "relu31",
+        "top": "conv50",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "Pixelshuffle": {
+        "name": "pixel_shuffle2",
+        "bottom": "conv50",
+        "top": "pixel_shuffle2",
+    	"upscale_factor": 2
+    },
+    "Deconvolution": {
+        "name": "conv_transpose4_filled_zeros",
+        "bottom": "pixel_shuffle2",
+        "top": "conv_transpose4_filled_zeros",
+        "num_output": 6,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 2,
+        "stride": 2,
+        "has_relu": false
+    }
+}

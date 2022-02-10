@@ -1,0 +1,544 @@
+{
+    "Input": {
+        "name": "data",
+        "top": "data",
+        "dim": [
+            1,
+            3,
+            192,
+            320
+        ],
+        "mean_value": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "scale": [
+            0.0039063,
+            0.0039063,
+            0.0039063
+        ],
+        "pad": 1
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_1",
+        "bottom": "data",
+        "top": "threshold_1",
+        "num_output": 16,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 3,
+        "stride": 2,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_2",
+        "bottom": "threshold_1",
+        "top": "threshold_2",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 2,
+        "stride": 2,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_3",
+        "bottom": "threshold_2",
+        "top": "threshold_3",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_4",
+        "bottom": "threshold_3",
+        "top": "threshold_4",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 2,
+        "stride": 2,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_5",
+        "bottom": "threshold_4",
+        "top": "threshold_5",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_6",
+        "bottom": "threshold_5",
+        "top": "threshold_6",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_7",
+        "bottom": "threshold_6",
+        "top": "threshold_7",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_8",
+        "bottom": "threshold_7",
+        "top": "threshold_8",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_1",
+        "bottom": [
+            "threshold_8",
+            "threshold_5"
+        ],
+        "top": "add1_1",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_9",
+        "bottom": "add1_1",
+        "top": "threshold_9",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_10",
+        "bottom": "threshold_9",
+        "top": "threshold_10",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_11",
+        "bottom": "threshold_10",
+        "top": "threshold_11",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_2",
+        "bottom": [
+            "threshold_11",
+            "add1_1"
+        ],
+        "top": "add1_2",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_12",
+        "bottom": "add1_2",
+        "top": "threshold_12",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_13",
+        "bottom": "threshold_12",
+        "top": "threshold_13",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 2,
+        "stride": 2,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_14",
+        "bottom": "threshold_13",
+        "top": "threshold_14",
+        "num_output": 64,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_15",
+        "bottom": "threshold_14",
+        "top": "threshold_15",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_16",
+        "bottom": "threshold_15",
+        "top": "threshold_16",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_17",
+        "bottom": "threshold_16",
+        "top": "threshold_17",
+        "num_output": 64,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_3",
+        "bottom": [
+            "threshold_17",
+            "threshold_14"
+        ],
+        "top": "add1_3",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_18",
+        "bottom": "add1_3",
+        "top": "threshold_18",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_19",
+        "bottom": "threshold_18",
+        "top": "threshold_19",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_20",
+        "bottom": "threshold_19",
+        "top": "threshold_20",
+        "num_output": 64,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_4",
+        "bottom": [
+            "threshold_20",
+            "add1_3"
+        ],
+        "top": "add1_4",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_21",
+        "bottom": "add1_4",
+        "top": "threshold_21",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_22",
+        "bottom": "threshold_21",
+        "top": "threshold_22",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_23",
+        "bottom": "threshold_22",
+        "top": "threshold_23",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_24",
+        "bottom": "threshold_23",
+        "top": "threshold_24",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_5",
+        "bottom": [
+            "threshold_24",
+            "threshold_21"
+        ],
+        "top": "add1_5",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_25",
+        "bottom": "add1_5",
+        "top": "threshold_25",
+        "num_output": 128,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Pixelshuffle": {
+        "name": "permute_1",
+        "bottom": "threshold_25",
+        "top": "permute_1",
+    	"upscale_factor": 2
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_26",
+        "bottom": "add1_2",
+        "top": "threshold_26",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_6",
+        "bottom": [
+            "permute_1",
+            "threshold_26"
+        ],
+        "top": "add1_6",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_27",
+        "bottom": "add1_6",
+        "top": "threshold_27",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_28",
+        "bottom": "threshold_27",
+        "top": "threshold_28",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_29",
+        "bottom": "threshold_28",
+        "top": "threshold_29",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_7",
+        "bottom": [
+            "threshold_29",
+            "add1_6"
+        ],
+        "top": "add1_7",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_30",
+        "bottom": "add1_7",
+        "top": "threshold_30",
+        "num_output": 128,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Pixelshuffle": {
+        "name": "permute_2",
+        "bottom": "threshold_30",
+        "top": "permute_2",
+    	"upscale_factor": 2
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_31",
+        "bottom": "threshold_2",
+        "top": "threshold_31",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_8",
+        "bottom": [
+            "permute_2",
+            "threshold_31"
+        ],
+        "top": "add1_8",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_32",
+        "bottom": "add1_8",
+        "top": "threshold_32",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_33",
+        "bottom": "threshold_32",
+        "top": "threshold_33",
+        "num_output": 32,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_34",
+        "bottom": "threshold_33",
+        "top": "threshold_34",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Eltwise": {
+        "name": "add1_9",
+        "bottom": [
+            "threshold_34",
+            "add1_8"
+        ],
+        "top": "add1_9",
+        "elt_type": "sum",
+        "has_relu": false
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_35",
+        "bottom": "add1_9",
+        "top": "threshold_35",
+        "num_output": 32,
+        "bias_iterm": true,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": true
+    },
+    "ConvolutionReLU": {
+        "name": "threshold_36",
+        "bottom": "threshold_35",
+        "top": "threshold_36",
+        "num_output": 64,
+        "bias_iterm": false,
+        "pad": 1,
+        "kernel_size": 3,
+        "stride": 1,
+        "has_relu": true
+    },
+    "Pixelshuffle": {
+        "name": "permute_3",
+        "bottom": "threshold_36",
+        "top": "permute_3",
+    	"upscale_factor": 2
+    },
+    "ConvolutionReLU": {
+        "name": "convnd_37",
+        "bottom": "permute_3",
+        "top": "convnd_37",
+        "num_output": 8,
+        "bias_iterm": false,
+        "pad": 0,
+        "kernel_size": 1,
+        "stride": 1,
+        "has_relu": false
+    },
+    "Pixelshuffle": {
+        "name": "permute_4",
+        "bottom": "convnd_37",
+        "top": "permute_4",
+    	"upscale_factor": 2
+    }
+}

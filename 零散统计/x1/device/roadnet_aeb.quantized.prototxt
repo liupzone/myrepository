@@ -1,0 +1,2348 @@
+layer {
+  name: "data"
+  type: "Input"
+  top: "data"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 192
+      dim: 320
+    }
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_1"
+  type: "ConvolutionRistretto"
+  bottom: "data"
+  top: "ConvNd_1"
+  propagate_down: false
+  convolution_param {
+    num_output: 16
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 2
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 7
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_1"
+  type: "ReLU"
+  bottom: "ConvNd_1"
+  top: "Threshold_1"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_2"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_1"
+  top: "ConvNd_2"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 2
+    group: 1
+    stride: 2
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 5
+    fl_params: 5
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_2"
+  type: "ReLU"
+  bottom: "ConvNd_2"
+  top: "Threshold_2"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 5
+    fl_layer_out: 5
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_3"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_2"
+  top: "ConvNd_3"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 5
+    fl_layer_out: 7
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_3"
+  type: "ReLU"
+  bottom: "ConvNd_3"
+  top: "Threshold_3"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_4"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_3"
+  top: "ConvNd_4"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 2
+    group: 1
+    stride: 2
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 10
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_4"
+  type: "ReLU"
+  bottom: "ConvNd_4"
+  top: "Threshold_4"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 10
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_5"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_4"
+  top: "ConvNd_5"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 6
+    fl_params: 5
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_5_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_4"
+  top: "ConvNd_5_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 6
+    fl_params: 13
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_5_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_5"
+  bottom: "ConvNd_5_residual_conv"
+  top: "ConvNd_5_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_6"
+  type: "ConvolutionRistretto"
+  bottom: "ConvNd_5_residual_sum"
+  top: "ConvNd_6"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 10
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_6"
+  type: "ReLU"
+  bottom: "ConvNd_6"
+  top: "Threshold_6"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 10
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_7"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_6"
+  top: "ConvNd_7"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 12
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_7"
+  type: "ReLU"
+  bottom: "ConvNd_7"
+  top: "Threshold_7"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 12
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_8"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_7"
+  top: "ConvNd_8"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 6
+    fl_params: 3
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_8_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_7"
+  top: "ConvNd_8_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 6
+    fl_params: 11
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_8_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_8"
+  bottom: "ConvNd_8_residual_conv"
+  top: "ConvNd_8_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_1"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_8_residual_sum"
+  bottom: "ConvNd_5_residual_sum"
+  top: "Add1_1"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_9"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_1"
+  top: "ConvNd_9"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 9
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_9"
+  type: "ReLU"
+  bottom: "ConvNd_9"
+  top: "Threshold_9"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 9
+    fl_layer_out: 9
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_10"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_9"
+  top: "ConvNd_10"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 9
+    fl_layer_out: 11
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_10"
+  type: "ReLU"
+  bottom: "ConvNd_10"
+  top: "Threshold_10"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 11
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_11"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_10"
+  top: "ConvNd_11"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 6
+    fl_params: 2
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_11_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_10"
+  top: "ConvNd_11_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 6
+    fl_params: 10
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_11_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_11"
+  bottom: "ConvNd_11_residual_conv"
+  top: "ConvNd_11_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_2"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_11_residual_sum"
+  bottom: "Add1_1"
+  top: "Add1_2"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_12"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_2"
+  top: "ConvNd_12"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 8
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_12"
+  type: "ReLU"
+  bottom: "ConvNd_12"
+  top: "Threshold_12"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_13"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_12"
+  top: "ConvNd_13"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 2
+    group: 1
+    stride: 2
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 9
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_13"
+  type: "ReLU"
+  bottom: "ConvNd_13"
+  top: "Threshold_13"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 9
+    fl_layer_out: 9
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_14"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_13"
+  top: "ConvNd_14"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 9
+    fl_layer_out: 6
+    fl_params: 5
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_14_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_13"
+  top: "ConvNd_14_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 9
+    fl_layer_out: 6
+    fl_params: 13
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_14_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_14"
+  bottom: "ConvNd_14_residual_conv"
+  top: "ConvNd_14_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_15"
+  type: "ConvolutionRistretto"
+  bottom: "ConvNd_14_residual_sum"
+  top: "ConvNd_15"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 10
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_15"
+  type: "ReLU"
+  bottom: "ConvNd_15"
+  top: "Threshold_15"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 10
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_16"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_15"
+  top: "ConvNd_16"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 11
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_16"
+  type: "ReLU"
+  bottom: "ConvNd_16"
+  top: "Threshold_16"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 11
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_17"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_16"
+  top: "ConvNd_17"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 6
+    fl_params: 3
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_17_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_16"
+  top: "ConvNd_17_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 6
+    fl_params: 11
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_17_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_17"
+  bottom: "ConvNd_17_residual_conv"
+  top: "ConvNd_17_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_3"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_17_residual_sum"
+  bottom: "ConvNd_14_residual_sum"
+  top: "Add1_3"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_18"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_3"
+  top: "ConvNd_18"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 9
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_18"
+  type: "ReLU"
+  bottom: "ConvNd_18"
+  top: "Threshold_18"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 9
+    fl_layer_out: 9
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_19"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_18"
+  top: "ConvNd_19"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 9
+    fl_layer_out: 10
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_19"
+  type: "ReLU"
+  bottom: "ConvNd_19"
+  top: "Threshold_19"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 10
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_20"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_19"
+  top: "ConvNd_20"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 6
+    fl_params: 2
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_20_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_19"
+  top: "ConvNd_20_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 6
+    fl_params: 10
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_20_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_20"
+  bottom: "ConvNd_20_residual_conv"
+  top: "ConvNd_20_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_4"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_20_residual_sum"
+  bottom: "Add1_3"
+  top: "Add1_4"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 6
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_21"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_4"
+  top: "ConvNd_21"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 7
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_21"
+  type: "ReLU"
+  bottom: "ConvNd_21"
+  top: "Threshold_21"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_22"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_21"
+  top: "ConvNd_22"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 10
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_22"
+  type: "ReLU"
+  bottom: "ConvNd_22"
+  top: "Threshold_22"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 10
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_23"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_22"
+  top: "ConvNd_23"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 10
+    fl_layer_out: 11
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_23"
+  type: "ReLU"
+  bottom: "ConvNd_23"
+  top: "Threshold_23"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 11
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_24"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_23"
+  top: "ConvNd_24"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 7
+    fl_params: 2
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_24_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_23"
+  top: "ConvNd_24_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 7
+    fl_params: 10
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_24_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_24"
+  bottom: "ConvNd_24_residual_conv"
+  top: "ConvNd_24_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_5"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_24_residual_sum"
+  bottom: "Threshold_21"
+  top: "Add1_5"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_25_0"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_5"
+  top: "ConvNd_25_0"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 8
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_25_0"
+  type: "ReLU"
+  bottom: "ConvNd_25_0"
+  top: "Threshold_25_0"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_25_1"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_5"
+  top: "ConvNd_25_1"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 8
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_25_1"
+  type: "ReLU"
+  bottom: "ConvNd_25_1"
+  top: "Threshold_25_1"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Permute_1"
+  type: "Concat2"
+  bottom: "Threshold_25_0"
+  bottom: "Threshold_25_1"
+  top: "Permute_1"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_26"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_2"
+  top: "ConvNd_26"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 6
+    fl_layer_out: 8
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_26"
+  type: "ReLU"
+  bottom: "ConvNd_26"
+  top: "Threshold_26"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_6"
+  type: "EltwiseRistretto"
+  bottom: "Permute_1"
+  bottom: "Threshold_26"
+  top: "Add1_6"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_27"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_6"
+  top: "ConvNd_27"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 11
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_27"
+  type: "ReLU"
+  bottom: "ConvNd_27"
+  top: "Threshold_27"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 11
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_28"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_27"
+  top: "ConvNd_28"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 12
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_28"
+  type: "ReLU"
+  bottom: "ConvNd_28"
+  top: "Threshold_28"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 12
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_29"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_28"
+  top: "ConvNd_29"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 8
+    fl_params: 2
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_29_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_28"
+  top: "ConvNd_29_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 8
+    fl_params: 10
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_29_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_29"
+  bottom: "ConvNd_29_residual_conv"
+  top: "ConvNd_29_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_7"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_29_residual_sum"
+  bottom: "Add1_6"
+  top: "Add1_7"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 8
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_30_0"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_7"
+  top: "ConvNd_30_0"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 7
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_30_0"
+  type: "ReLU"
+  bottom: "ConvNd_30_0"
+  top: "Threshold_30_0"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_30_1"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_7"
+  top: "ConvNd_30_1"
+  propagate_down: false
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 8
+    fl_layer_out: 7
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_30_1"
+  type: "ReLU"
+  bottom: "ConvNd_30_1"
+  top: "Threshold_30_1"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Permute_2"
+  type: "Concat2"
+  bottom: "Threshold_30_0"
+  bottom: "Threshold_30_1"
+  top: "Permute_2"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_31"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_2"
+  top: "ConvNd_31"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 5
+    fl_layer_out: 7
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_31"
+  type: "ReLU"
+  bottom: "ConvNd_31"
+  top: "Threshold_31"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_8"
+  type: "EltwiseRistretto"
+  bottom: "Permute_2"
+  bottom: "Threshold_31"
+  top: "Add1_8"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_32"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_8"
+  top: "ConvNd_32"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 11
+    fl_params: 8
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_32"
+  type: "ReLU"
+  bottom: "ConvNd_32"
+  top: "Threshold_32"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 11
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_33"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_32"
+  top: "ConvNd_33"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 11
+    fl_layer_out: 12
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_33"
+  type: "ReLU"
+  bottom: "ConvNd_33"
+  top: "Threshold_33"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 12
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_34"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_33"
+  top: "ConvNd_34"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 7
+    fl_params: 1
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_34_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Threshold_33"
+  top: "ConvNd_34_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 12
+    fl_layer_out: 7
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_34_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_34"
+  bottom: "ConvNd_34_residual_conv"
+  top: "ConvNd_34_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Add1_9"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_34_residual_sum"
+  bottom: "Add1_8"
+  top: "Add1_9"
+  propagate_down: false
+  propagate_down: false
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 7
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_35"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_9"
+  top: "ConvNd_35"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 3
+    fl_params: 2
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_35_residual_conv"
+  type: "ConvolutionRistretto"
+  bottom: "Add1_9"
+  top: "ConvNd_35_residual_conv"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 7
+    fl_layer_out: 3
+    fl_params: 10
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_35_residual_sum"
+  type: "EltwiseRistretto"
+  bottom: "ConvNd_35"
+  bottom: "ConvNd_35_residual_conv"
+  top: "ConvNd_35_residual_sum"
+  eltwise_param {
+    operation: SUM
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 3
+    fl_params: 8
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_36_0"
+  type: "ConvolutionRistretto"
+  bottom: "ConvNd_35_residual_sum"
+  top: "ConvNd_36_0"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 3
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_36_0"
+  type: "ReLU"
+  bottom: "ConvNd_36_0"
+  top: "Threshold_36_0"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 3
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_36_1"
+  type: "ConvolutionRistretto"
+  bottom: "ConvNd_35_residual_sum"
+  top: "ConvNd_36_1"
+  propagate_down: false
+  convolution_param {
+    num_output: 32
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 3
+    fl_params: 9
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Threshold_36_1"
+  type: "ReLU"
+  bottom: "ConvNd_36_1"
+  top: "Threshold_36_1"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 3
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "Permute_3"
+  type: "Concat2"
+  bottom: "Threshold_36_0"
+  bottom: "Threshold_36_1"
+  top: "Permute_3"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 3
+    fl_params: -13
+    unsigned_in: true
+    unsigned_out: true
+  }
+}
+layer {
+  name: "ConvNd_37_filled_zeros_0"
+  type: "ConvolutionRistretto"
+  bottom: "Permute_3"
+  top: "ConvNd_37_filled_zeros_0"
+  propagate_down: false
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 1
+    fl_params: 7
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "ConvNd_37_filled_zeros_1"
+  type: "ConvolutionRistretto"
+  bottom: "Permute_3"
+  top: "ConvNd_37_filled_zeros_1"
+  propagate_down: false
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    pad: 0
+    kernel_size: 1
+    group: 1
+    stride: 1
+    dilation: 1
+  }
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 3
+    fl_layer_out: 1
+    fl_params: 7
+    unsigned_in: true
+    unsigned_out: false
+  }
+}
+layer {
+  name: "Permute_4"
+  type: "Concat2"
+  bottom: "ConvNd_37_filled_zeros_0"
+  bottom: "ConvNd_37_filled_zeros_1"
+  top: "Permute_4"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 1
+    fl_layer_out: 1
+    fl_params: -13
+    unsigned_in: false
+    unsigned_out: false
+  }
+}
+
+layer {
+  name: "argmax_1"
+  type: "ArgMax"
+  bottom: "Permute_4"
+  top: "argmax_1"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 2
+    fl_layer_out: 2
+    fl_params: -13
+    unsigned_in: false
+    unsigned_out: true
+ }
+}
+
+layer {
+  name: "save_1"
+  type: "Save"
+  bottom: "Permute_4"
+  top: "save_1"
+  propagate_down: false
+  quantization_param {
+    bw_layer_in: 8
+    bw_layer_out: 8
+    bw_params: 8
+    fl_layer_in: 2
+    fl_layer_out: 2
+    fl_params: -13
+    unsigned_in: false
+    unsigned_out: true
+  }
+}
